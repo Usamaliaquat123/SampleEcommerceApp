@@ -4,6 +4,7 @@ import {
   StyleSheet,
   ScrollView,
   View,
+  TextInput,
   Text,
   StatusBar,
 } from 'react-native';
@@ -24,18 +25,31 @@ class App extends Component {
 
   render() {
     let { PostCode, hide } = this.state
-    let jsCode = `
-    document.querySelector('#delivery_location').value = ${PostCode};
-    `;
+    let jsCode = `(function() {
+      var iconPopup = document.createElement("div");
+
+      iconPopup.id = "popupIcon";
+      iconPopup.className = "Iconpopup"
+
+      // Add styling of popup
+      document.getElementById("popupIcon").style.color = "#"
+      document.getElementById("popupIcon").style.position = "absolute"
+      document.getElementById("popupIcon").style.right = "0"
+      document.getElementById("popupIcon").style.borderRadius = "30"
+
+      alert(aNewBodyElement); 
+    })();
+
+    true;`;
     return (
       <View style={styles.container}>
         <WebView
           source={{ uri: 'https://www.theiconic.com.au/shuffle-tank-892964.html' }}
           style={styles.webView}
           ref="myWebView"
-          injectedJavaScript={PostCode!==""?jsCode:null}
+          injectedJavaScript={jsCode}
+          onMessage={(event) => console.log(event.nativeEvent.data)}
           javaScriptEnabledAndroid={true}
-
         >
 
         </WebView>
@@ -46,7 +60,9 @@ class App extends Component {
           }}
 
           >
-            <Input containerStyle={{borderColor:"black",borderWidth:1,margin:5}} value={PostCode} onChange={(text) => this.setState({ PostCode: text })} />
+            <TextInput style={{borderColor:"black",borderWidth:1,margin:5}} value={PostCode} onChangeText={(text) => {console.log(text)
+            
+            }}/>
             <Button containerStyle={{margin:5,width:150,alignSelf:"flex-end"}} title="Test PostCode" />
           </Card>
         }
