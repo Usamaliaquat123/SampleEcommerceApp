@@ -45,24 +45,6 @@ class App extends Component {
 
   render() {
     let { PostCode, hide } = this.state;
-    let jsCode = `(function() {
-var iconPopup = document.createElement("div");
-
-
-  iconPopup.id = "popupIcon";
-  iconPopup.className = "Iconpopup"
-
-  // Add styling of popup
-  document.getElementById("popupIcon").style.color = "#"
-  document.getElementById("popupIcon").style.position = "absolute"
-  document.getElementById("popupIcon").style.right = "0"
-  document.getElementById("popupIcon").style.borderRadius = "30"
-
-  alert(aNewBodyElement); 
-})();
-
-true;`;
-    // ref => (this.myWebView = ref)
     return (
       <View style={styles.container}>
         <WebView
